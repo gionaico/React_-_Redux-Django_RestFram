@@ -1,0 +1,4 @@
+/redux-form
+/frontend/node_modules
+/backend/.venv
+*.venv
