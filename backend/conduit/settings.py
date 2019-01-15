@@ -155,3 +155,4 @@ REST_FRAMEWORK = {
 
 
 EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+SENDGRID_API_KEY = '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'

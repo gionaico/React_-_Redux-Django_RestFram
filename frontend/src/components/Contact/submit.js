@@ -16,22 +16,45 @@ const mapDispatchToProps = dispatch => ({
 
 function submit(values) {
   console.log("v-------------", values)
+
+  /* fetch(`http://localhost:4000/api/contact`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify ({data:{
+        emaili: values.email,
+        company: values.username,
+        projectDescription: values.username
+      }})
+    })
+    .then((result) => result.json())
+    .then((result) => {
+
+        console.log(result)
+    }); */
   return agent.Contact.sendEmail({
-      /* email: values.email, */
+      emaili: values.email,
       company: values.username,
       projectDescription: values.username
-    }).then((res) => {
-    console.log("v-------------",res)
-    if (res.email && !res.status) {
-      console.log("v-------------", res)
+    }).then((response) => {
+    console.log("v-------------",response)
+    if (response.email && !response.status) {
+      console.log("v-------------", response)
       throw new SubmissionError({
-        username: res.message,
+        username: response.message,
         _error: 'Login failed!'
       })
     } else {
-      window.alert(`You submitted:\n\n${JSON.stringify(res, null, 2)}`)
+      window.alert(`You submitted:\n\n${JSON.stringify(response, null, 2)}`)
     }
   })
+  .catch(err => {
+    console.log(err.message, err.response)
+  });
+
+  /* .catch(err => console.log("v-------------", err)) */
 
 };
 export default submit

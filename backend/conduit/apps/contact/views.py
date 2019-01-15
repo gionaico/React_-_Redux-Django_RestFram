@@ -2,19 +2,30 @@ from django.core.mail import send_mail, BadHeaderError
 from rest_framework import permissions, status, views, viewsets
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework.response import Response
-
+from .serializers import ContactFormSerializer
+import json
 
 class ContactView(views.APIView): 
-    print '********************************** welcome ContactView'
-    def post(self, request, format=None):
-        """
+    serializer_class = ContactFormSerializer
+
+    def post(self, request):
+        """ print (json.dumps(request.data))
+        print (type(json.dumps(request.data)))
+        u=json.dumps(request.data)
+        d = json.loads(json.dumps(request.data)) """
+        
+        info = request.data.get('data', {})
+        print (info)
+        serializer = self.serializer_class(data=info)
+        serializer.is_valid(raise_exception=True)
+
+
+        print '**********************************'
         return Response({
                     'status': 'true',
                     'message': 'Success! Thank you for your message'
                 }, status=status.HTTP_200_OK)
-        """
         
-        print '**********************************'
         data = request.data
         print data
         print '**********************************'
@@ -28,36 +39,7 @@ class ContactView(views.APIView):
         print message
         print '**********************************'
         
-        """
-        return Response({
-                    'status': 'true',
-                    'message': 'Success! Thank you for your message'
-                }, status=status.HTTP_200_OK)
-        """
-        
-        if email is None:
-            print "1"
-            """ return Response({
-                    'status': 'false',
-                    'message': "field is missing"
-                }, status=status.HTTP_400_BAD_REQUEST) """
-            return Response({
-                    'email': True,
-                    'status': False,
-                    'message': "field is missing"
-                })
-        elif subject is None:
-            print "2"
-            return Response({
-                    'status': 'false',
-                    'message': "'subject' field is missing"
-                }, status=status.HTTP_400_BAD_REQUEST)
-        elif message is None:
-            print "3"
-            return Response({
-                    'status': 'false',
-                    'message': "'message' field is missing"
-                }, status=status.HTTP_400_BAD_REQUEST)
+                
             
         try:
             print "try"

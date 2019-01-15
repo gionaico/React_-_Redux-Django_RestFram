@@ -93,7 +93,7 @@ const Profile = {
 
 const Contact = {
   sendEmail: data =>
-    requests.post(`/contact`,   data )
+    requests.post(`/contact`,   {data} )
 };
 
 export default {
