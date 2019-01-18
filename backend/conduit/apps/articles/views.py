@@ -195,7 +195,7 @@ class ArticlesFavoriteAPIView(APIView):
 
 class TagListAPIView(generics.ListAPIView):
     queryset = Tag.objects.all()
-    pagination_class = None
+    pagination_class = None """ desabilita paginacion """
     permission_classes = (AllowAny,)
     serializer_class = TagSerializer
 

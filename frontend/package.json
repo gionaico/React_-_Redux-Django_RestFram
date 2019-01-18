@@ -9,6 +9,7 @@
   "dependencies": {
     "@material-ui/core": "^3.8.3",
     "history": "^4.6.3",
+    "immutable": "^4.0.0-rc.12",
     "marked": "^0.3.6",
     "material-ui": "^0.20.2",
     "prop-types": "^15.5.10",
@@ -22,9 +23,12 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^8.1.0",
     "redux-form-website-template": "^1.0.6",
+    "redux-immutablejs": "0.0.8",
     "redux-logger": "^3.0.1",
     "superagent": "^3.8.2",
-    "superagent-promise": "^1.1.0"
+    "superagent-promise": "^1.1.0",
+    "sweetalert2": "^7.33.1",
+    "sweetalert2-react-content": "^1.0.1"
   },
   "scripts": {
     "start": "cross-env PORT=4100 react-scripts start",

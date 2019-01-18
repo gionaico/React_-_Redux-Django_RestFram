@@ -8,9 +8,7 @@ class Contact extends React.Component {
   render() {
     return (
       <div className="home-page">
-
           <ContactForm />
-
       </div>
     );
   }

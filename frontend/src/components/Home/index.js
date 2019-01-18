@@ -15,7 +15,8 @@ const Promise = global.Promise;
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  token: state.common.token,
+  prueba:state.form.contactForm
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,6 +43,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.prueba)
     return (
       <div className="home-page">
 
