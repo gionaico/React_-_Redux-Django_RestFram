@@ -6,8 +6,8 @@ from rest_framework.permissions import (
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Product, Comment, Category
-from .serializers import ProductSerializer, CommentSerializer, CategorySerializer
+from .models import Product, Comentario, Category
+from .serializers import ProductSerializer, ComentarioSerializer, CategorySerializer
 
 
 
@@ -100,15 +100,15 @@ class ProductViewSet(mixins.CreateModelMixin,
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class CommentsListCreateAPIView(generics.ListCreateAPIView):
+class ComentariosListCreateAPIView(generics.ListCreateAPIView):
     lookup_field = 'product__slug'
     lookup_url_kwarg = 'product_slug'
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Comment.objects.select_related(
+    queryset = Comentario.objects.select_related(
         'product', 'product__saler', 'product__saler__user',
         'saler', 'saler__user'
     )
-    serializer_class = CommentSerializer
+    serializer_class = ComentarioSerializer
 
     def filter_queryset(self, queryset):
         # The built-in list function calls `filter_queryset`. Since we only
@@ -119,7 +119,7 @@ class CommentsListCreateAPIView(generics.ListCreateAPIView):
         return queryset.filter(**filters)
 
     def create(self, request, article_slug=None):
-        data = request.data.get('comment', {})
+        data = request.data.get('comentario', {})
         context = {'saler': request.user.profile}
 
         try:
@@ -134,18 +134,18 @@ class CommentsListCreateAPIView(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class CommentsDestroyAPIView(generics.DestroyAPIView):
-    lookup_url_kwarg = 'comment_pk'
+class ComentariosDestroyAPIView(generics.DestroyAPIView):
+    lookup_url_kwarg = 'comentario_pk'
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Comment.objects.all()
+    queryset = Comentario.objects.all()
 
-    def destroy(self, request, product_slug=None, comment_pk=None):
+    def destroy(self, request, product_slug=None, comentario_pk=None):
         try:
-            comment = Comment.objects.get(pk=comment_pk)
-        except Comment.DoesNotExist:
-            raise NotFound('A comment with this ID does not exist.')
+            comentario = Comentario.objects.get(pk=comentario_pk)
+        except Comentario.DoesNotExist:
+            raise NotFound('A Comentario with this ID does not exist.')
 
-        comment.delete()
+        comentario.delete()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 

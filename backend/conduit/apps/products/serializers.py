@@ -53,14 +53,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
     
 
-class CommentSerializer(serializers.ModelSerializer):
+class ComentarioSerializer(serializers.ModelSerializer):
     saler = ProfileSerializer(required=False)
 
     createdAt = serializers.SerializerMethodField(method_name='get_created_at')
     updatedAt = serializers.SerializerMethodField(method_name='get_updated_at')
 
     class Meta:
-        model = Comment
+        model = Comentario
         fields = (
             'id',
             'saler',
@@ -70,11 +70,11 @@ class CommentSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        article = self.context['article']
+        product = self.context['product']
         saler = self.context['saler']
 
         return Comment.objects.create(
-            saler=saler, article=article, **validated_data
+            saler=saler, product=product, **validated_data
         )
 
     def get_created_at(self, instance):

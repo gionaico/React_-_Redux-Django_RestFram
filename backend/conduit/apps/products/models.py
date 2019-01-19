@@ -22,15 +22,15 @@ class Product(TimestampedModel):
         return self.name
 
 
-class Comment(TimestampedModel):
+class Comentario(TimestampedModel):
     body = models.TextField()
 
     product = models.ForeignKey(
-        'products.Product', related_name='comments', on_delete=models.CASCADE
+        'products.Product', related_name='comentarios', on_delete=models.CASCADE
     )
 
-    author = models.ForeignKey(
-        'profiles.Profile', related_name='comments', on_delete=models.CASCADE
+    saler = models.ForeignKey(
+        'profiles.Profile', related_name='comentarios', on_delete=models.CASCADE
     )
 
 
