@@ -15,12 +15,12 @@ class ProductViewSet(mixins.CreateModelMixin,
                      mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
-
+    print("\n---------------------------------------   ProductViewSet  -- \n")
     lookup_field = 'slug'
     queryset = Product.objects.select_related('saler', 'saler__user')
     permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_class = ProductSerializer
-
+    
     def get_queryset(self):
         queryset = self.queryset
 
@@ -36,6 +36,7 @@ class ProductViewSet(mixins.CreateModelMixin,
         return queryset
 
     def create(self, request):
+        print("\n---------------------------------------  ProductViewSet  -- create\n")
         serializer_context = {
             'saler': request.user.profile,
             'request': request
@@ -51,6 +52,7 @@ class ProductViewSet(mixins.CreateModelMixin,
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
+        print("\n---------------------------------------  ProductViewSet  -- list\n")
         serializer_context = {'request': request}
         page = self.paginate_queryset(self.get_queryset())
 
@@ -101,6 +103,7 @@ class ProductViewSet(mixins.CreateModelMixin,
 
 
 class ComentariosListCreateAPIView(generics.ListCreateAPIView):
+    print("\n---------------------------------------  ComentariosListCreateAPIView  -- \n")
     lookup_field = 'product__slug'
     lookup_url_kwarg = 'product_slug'
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -135,6 +138,7 @@ class ComentariosListCreateAPIView(generics.ListCreateAPIView):
 
 
 class ComentariosDestroyAPIView(generics.DestroyAPIView):
+    print("\n---------------------------------------  ComentariosDestroyAPIView  -- \n")
     lookup_url_kwarg = 'comentario_pk'
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Comentario.objects.all()
@@ -151,6 +155,7 @@ class ComentariosDestroyAPIView(generics.DestroyAPIView):
 
 
 class CategoryListAPIView(generics.ListAPIView):
+    print("\n---------------------------------------  CategoryListAPIView  -- \n")
     queryset = Category.objects.all()
     pagination_class = None
     permission_classes = (AllowAny,)
@@ -165,8 +170,9 @@ class CategoryListAPIView(generics.ListAPIView):
         }, status=status.HTTP_200_OK)
 
 
-class ProductsFeedAPIView(generics.ListAPIView):
-    permission_classes = (IsAuthenticated,)
+class ProductFeedAPIView(generics.ListAPIView):
+    print("\n---------------------------------------  ProductFeedAPIView  -- \n")
+    # permission_classes = (IsAuthenticated,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -178,5 +184,6 @@ class ProductsFeedAPIView(generics.ListAPIView):
         serializer = self.serializer_class(
             page, context=serializer_context, many=True
         )
+        print("\n---------------------------------------  ProductFeedAPIView  list-- \n", serializer)
 
         return self.get_paginated_response(serializer.data)

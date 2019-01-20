@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from conduit.apps.profiles.serializers import ProfileSerializer
-from .models import Product, Comment, Category
+from .models import Product, Comentario, Category
 from .relations import CategoryRelatedField
 
 
@@ -10,7 +10,7 @@ class ProductSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(required=False)
 
 
-    cateoryList = CategoryRelatedField(many=True, required=False, source='category')
+    categoryList = CategoryRelatedField(many=True, required=False, source='category')
 
     # Django REST Framework makes it possible to create a read-only field that
     # gets it's value by calling a function. In this case, the client expects
@@ -73,7 +73,7 @@ class ComentarioSerializer(serializers.ModelSerializer):
         product = self.context['product']
         saler = self.context['saler']
 
-        return Comment.objects.create(
+        return Comentario.objects.create(
             saler=saler, product=product, **validated_data
         )
 

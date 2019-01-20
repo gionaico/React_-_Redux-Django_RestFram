@@ -19,7 +19,7 @@ class Profile(TimestampedModel):
 
     # In addition to the `bio` field, each user may have a profile image or
     # avatar. Similar to `bio`, this field is not required. It may be blank.
-    image = models.URLField(blank=True)
+    image = models.URLField(blank=True, default='https://api.adorable.io/avatars/285/i.png')
 
     # This is an example of a Many-To-Many relationship where both sides of the
     # relationship are of the same model. In this case, the model is `Profile`.

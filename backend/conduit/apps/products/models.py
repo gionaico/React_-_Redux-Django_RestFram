@@ -5,7 +5,8 @@ from conduit.apps.core.models import TimestampedModel
 class Product(TimestampedModel):
     slug = models.SlugField(db_index=True, max_length=255, unique=True)
     name = models.CharField(db_index=True, max_length=255)
-
+    
+    image = models.TextField(default='https://cdn.pixabay.com/photo/2016/08/04/10/37/office-1568780_960_720.jpg')
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
