@@ -1,5 +1,5 @@
-/redux-form
-/frontend/node_modules
-/backend/.venv
-*.venv
 /apuntes
+/backend/.venv
+/frontend/node_modules
+/redux-form
+*.venv

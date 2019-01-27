@@ -73,6 +73,35 @@ const Articles = {
     requests.post('/articles', { article })
 };
 
+/*
+all: page =>    http: //0.0.0.0:4000/api/products?limit=10 
+
+*/
+const Products = {
+  all: page =>
+    requests.get(`/products?${limit(10, page)}`),
+  byAuthor: (saler, page) =>
+    requests.get(`/products?saler=${encode(saler)}&${limit(5, page)}`),
+  byTag: (category, page) =>
+    requests.get(`/products?category=${encode(category)}&${limit(10, page)}`),
+  del: slug =>
+    requests.del(`/products/${slug}`),
+  feed: () =>
+    requests.get('/products/feed?limit=10&offset=0'),
+  get: slug =>
+    requests.get(`/products/${slug}`),
+  update: product =>
+    requests.put(`/products/${product.slug}`, {
+      product: omitSlug(product)
+    }),
+  create: product =>
+    requests.post('/products', {
+      product
+    })
+};
+
+
+
 const Comments = {
   create: (slug, comment) =>
     requests.post(`/articles/${slug}/comments`, { comment }),

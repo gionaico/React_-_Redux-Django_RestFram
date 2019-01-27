@@ -1,15 +1,21 @@
 from rest_framework import generics, mixins, status, viewsets
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import (
-    AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
+    AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 )
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .renderers import ProductJSONRenderer
 
 from .models import Product, Comentario, Category
 from .serializers import ProductSerializer, ComentarioSerializer, CategorySerializer
 
-
+class ProductViewSetAdmin(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'slug'
+    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
 
 class ProductViewSet(mixins.CreateModelMixin, 
                      mixins.ListModelMixin,
@@ -18,38 +24,50 @@ class ProductViewSet(mixins.CreateModelMixin,
     print("\n---------------------------------------   ProductViewSet  -- \n")
     lookup_field = 'slug'
     queryset = Product.objects.select_related('saler', 'saler__user')
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    #permission_classes = (IsAuthenticatedOrReadOnly,)
+    renderer_classes = (ProductJSONRenderer,)
     serializer_class = ProductSerializer
     
     def get_queryset(self):
+        print("\n---------------------------------------   ProductViewSet-get_queryset  -- \n")
         queryset = self.queryset
-
+        
         saler = self.request.query_params.get('saler', None)
         if saler is not None:
+            print("saler")
             queryset = queryset.filter(saler__user__username=saler)
-
+                
         category = self.request.query_params.get('category', None)
         if category is not None:
-            queryset = queryset.filter(categorys__category=category)
+            print("category")
+            queryset = queryset.filter(category__category=category)
 
 
         return queryset
 
     def create(self, request):
         print("\n---------------------------------------  ProductViewSet  -- create\n")
+        
+        #serializer_context = {'request': request}
+        #info = request.data.get('product', {})
+
+        #print(request.data)
         serializer_context = {
-            'saler': request.user.profile,
-            'request': request
+            #'saler': request.user.profile,
+            'saler': request.user,
+            'request': request.data
         }
-        serializer_data = request.data.get('product', {})
-
-        serializer = self.serializer_class(
-        data=serializer_data, context=serializer_context
-        )
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer_context)
+        return Response("probando create", status=status.HTTP_200_OK)
+        #serializer_data = request.data.get('product', {})
+        #print(serializer_context)
+        #serializer = self.serializer_class(
+        #data=serializer_data, context=serializer_context
+        #)
+        #serializer.is_valid(raise_exception=True)
+        #serializer.save()
+        #
+        #return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
         print("\n---------------------------------------  ProductViewSet  -- list\n")
@@ -65,6 +83,7 @@ class ProductViewSet(mixins.CreateModelMixin,
         return self.get_paginated_response(serializer.data)
 
     def retrieve(self, request, slug):
+        print("\n---------------------------------------  ProductViewSet  -- retrieve\n")
         serializer_context = {'request': request}
 
         try:
@@ -79,8 +98,20 @@ class ProductViewSet(mixins.CreateModelMixin,
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def delete(self, request, slug):
+        print("\n---------------------------------------  ProductViewSet  -- delete\n")
+        serializer_context = {'request': request}
+        try:
+            serializer_instance = self.queryset.get(slug=slug)
+            serializer_instance.delete()
+            return Response("deleted", status=status.HTTP_200_OK)
+        except Product.DoesNotExist:
+            return Response("NO-----deleted", status=status.HTTP_200_OK)
+
+
 
     def update(self, request, slug):
+        print("\n---------------------------------------  ProductViewSet  -- update\n")
         serializer_context = {'request': request}
 
         try:
@@ -114,6 +145,7 @@ class ComentariosListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ComentarioSerializer
 
     def filter_queryset(self, queryset):
+        print("\n---------------------------------------  ComentariosListCreateAPIView-filter_queryset-- \n")    
         # The built-in list function calls `filter_queryset`. Since we only
         # want comments for a specific article, this is a good place to do
         # that filtering.
@@ -122,6 +154,7 @@ class ComentariosListCreateAPIView(generics.ListCreateAPIView):
         return queryset.filter(**filters)
 
     def create(self, request, article_slug=None):
+        print("\n---------------------------------------  ComentariosListCreateAPIView-create-- \n")    
         data = request.data.get('comentario', {})
         context = {'saler': request.user.profile}
 
@@ -162,6 +195,7 @@ class CategoryListAPIView(generics.ListAPIView):
     serializer_class = CategorySerializer
 
     def list(self, request):
+        print("\n---------------------------------------  CategoryListAPIView-list-- \n")
         serializer_data = self.get_queryset()
         serializer = self.serializer_class(serializer_data, many=True)
 
