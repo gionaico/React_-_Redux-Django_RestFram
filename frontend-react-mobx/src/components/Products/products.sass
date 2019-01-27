@@ -1,0 +1,34 @@
+@import "../../styles.sass"; 
+
+.products-container
+
+    .products-container__product-list-cont
+        min-width: calc($screen-xss-min-20)
+        max-width: $screen-md-min
+        padding: $general-padding
+    
+    .products-container__product-list
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+        gap: $general-gap
+        background-color: $body-color
+
+    .products-container__product-preview
+        display: grid
+        grid-template-columns: 1fr
+        gap: $small-gap
+        background-color: $element-bck
+        border: 1px solid red
+
+        .products-container__img
+            width: 100%
+            height: $img-min-height
+        
+        .products-container__info
+            padding: $small-padding
+            text-align: center
+            
+            .products-container__title
+                color: $primary-color
+                text-transform: uppercase
+                font-size: $font-size-text
