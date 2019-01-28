@@ -17,15 +17,20 @@ export default class ProductPreview extends React.Component {
     //console.log(product.categoryList.map(tag => tag))
     return (
       <div className="products-container__product-preview">
-        <img src={product.image} className="products-container__img" alt={product.slug}/>
+        <Link to={`/product/${product.slug}`}>
+          <img src={product.image} className="products-container__img" alt={product.slug}/>
+        </Link>
         <div className="products-container__info">
-          <h4 className="products-container__title">{product.name}</h4>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
-          <p>{product.saler.username}</p>
-          <p>{product.slug}</p> 
+          <Link to={`/product/${product.slug}`}>
+            <h4 className="products-container__title">{product.name}</h4>
+          </Link>
+          <p>{product.price} $</p>
+          <p className="products-container__destacado">User: {product.saler.username}</p>
+          {/* <p>{product.slug}</p>  */}
+          <p className="products-container__descr">{product.description}</p>
         </div>
       </div>
     );
   }
 }
+

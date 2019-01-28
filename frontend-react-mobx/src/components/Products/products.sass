@@ -18,7 +18,8 @@
         grid-template-columns: 1fr
         gap: $small-gap
         background-color: $element-bck
-        border: 1px solid red
+        border: 2px solid $orange
+        border-radius: 0 0 10px 10px
 
         .products-container__img
             width: 100%
@@ -32,3 +33,14 @@
                 color: $primary-color
                 text-transform: uppercase
                 font-size: $font-size-text
+                font-weight: $font-with-bold
+            .products-container__descr
+                display: block
+                text-overflow: ellipsis
+                word-wrap: break-word
+                overflow: hidden
+                max-height: 3.6em
+                line-height: 1.8em
+            .products-container__destacado
+                text-align: justify
+

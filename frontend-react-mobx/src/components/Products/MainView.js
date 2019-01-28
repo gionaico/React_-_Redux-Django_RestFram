@@ -25,7 +25,7 @@ export default class MainView extends React.Component {
 
   handleSetPage = page => {
     this.props.productsStorage.setPage(page);
-    this.props.productsStorage.loadArticles();
+    this.props.productsStorage.loadProducts();
   };
 
   render() {
@@ -35,8 +35,6 @@ export default class MainView extends React.Component {
     
     return (
       <div>
-        <div className="media">main home component</div>
-        
         <ProductsList
           products={products}
           loading={isLoading}

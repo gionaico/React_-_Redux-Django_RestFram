@@ -12,6 +12,7 @@ import Profile from './Profile';
 import Register from './Register';
 import Settings from './Settings';
 import Products from './Products';
+import ProductDetails from './ProductDetails';
 
 @inject('userStore', 'commonStore')
 @withRouter
@@ -38,6 +39,7 @@ export default class App extends React.Component {
           <Header />
           <Switch>
             <Route path="/products" component={Products} />
+            <Route path="/product/:id" component={ProductDetails} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/editor/:slug?" component={Editor} />
