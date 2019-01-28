@@ -20,6 +20,7 @@ const handleErrors = err => {
 const responseBody = res => res.body;
 
 const tokenPlugin = req => {
+  console.log(req)
   if (commonStore.token) {
     req.set('authorization', `Token ${commonStore.token}`);
   }

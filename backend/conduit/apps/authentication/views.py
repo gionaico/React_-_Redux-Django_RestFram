@@ -76,7 +76,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         user_data = request.data.get('user', {})
-
+        print("UserRetrieveUpdateAPIView-----update", user_data)
         serializer_data = {
             'username': user_data.get('username', request.user.username),
             'email': user_data.get('email', request.user.email),
@@ -89,11 +89,14 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
         # Here is that serialize, validate, save pattern we talked about
         # before.
+        print("----")
         serializer = self.serializer_class(
             request.user, data=serializer_data, partial=True
         )
+        print("----222")
         serializer.is_valid(raise_exception=True)
+        
         serializer.save()
-
+        
         return Response(serializer.data, status=status.HTTP_200_OK)
 

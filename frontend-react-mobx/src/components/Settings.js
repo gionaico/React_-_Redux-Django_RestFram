@@ -31,7 +31,7 @@ class SettingsForm extends React.Component {
         delete user.password;
       }
 
-      this.props.onSubmitForm(user);
+      this.props.onSubmitForm(user).then(r=>console.log(r));
     };
   }
 
@@ -126,7 +126,7 @@ class Settings extends React.Component {
       .then(() => this.props.history.replace('/'));
 
   render() {
-
+    console.log(this.props.userStore)
     return (
       <div className="settings-page">
         <div className="container page">
