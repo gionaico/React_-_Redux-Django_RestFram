@@ -28,10 +28,15 @@ export class ProductsStore {
     this.page = page;
   }
 
+  @action setPredicate(predicate) {
+    if (JSON.stringify(predicate) === JSON.stringify(this.predicate)) return;
+    this.clear();
+    this.predicate = predicate;
+  }
+  
   $req() {
-    if (this.predicate.myFeed) return agent.Products.feed(this.page, LIMIT);
-    if (this.predicate.tag) return agent.Products.byTag(this.predicate.tag, this.page, LIMIT);
-    if (this.predicate.author) return agent.Products.byAuthor(this.predicate.author, this.page, LIMIT);
+    if (this.predicate.category) return agent.Products.byCategory(this.predicate.category, this.page, LIMIT);
+    if (this.predicate.saler) return agent.Products.bySaler(this.predicate.saler, this.page, LIMIT);
     return agent.Products.all(this.page, LIMIT, this.predicate);
   }
 

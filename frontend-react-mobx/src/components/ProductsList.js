@@ -19,6 +19,13 @@ const ProductsList = props => {
     );
   }
 
+  let paginacionElem=(<ListPagination
+      onSetPage={props.onSetPage}
+      totalPagesCount={props.totalPagesCount}
+      currentPage={props.currentPage}
+    />)  
+  let pagination = props.pagination ? paginacionElem : ""
+  
   return (
     <div className="products-container__product-list-cont centrar-by-margin">
       <div className="products-container__product-list">
@@ -30,12 +37,9 @@ const ProductsList = props => {
           })
         }
       </div>
+      
+      { pagination }
 
-      <ListPagination
-        onSetPage={props.onSetPage}
-        totalPagesCount={props.totalPagesCount}
-        currentPage={props.currentPage}
-      />
     </div>
   );
 };

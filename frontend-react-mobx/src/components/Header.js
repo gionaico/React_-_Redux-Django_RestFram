@@ -61,6 +61,12 @@ const LoggedInView = props => {
         </li>
 
         <li className="nav-item">
+          <Link to="/products" className="nav-link">
+            Products
+          </Link>
+        </li>
+
+        <li className="nav-item">
           <Link
             to={`/@${props.currentUser.username}`}
             className="nav-link"

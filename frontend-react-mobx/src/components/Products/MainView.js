@@ -41,6 +41,8 @@ export default class MainView extends React.Component {
           totalPagesCount={totalPagesCount}
           currentPage={page}
           onSetPage={this.handleSetPage}
+          pagination={true}
+          extrainfo={true}
         />
 
       </div>
