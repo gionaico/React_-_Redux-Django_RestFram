@@ -118,7 +118,6 @@ class UserSerializer(serializers.ModelSerializer):
     # model.
     bio = serializers.CharField(source='profile.bio', read_only=True)
     image = serializers.CharField(source='profile.image', read_only=True)
-
     class Meta:
         model = User
         fields = (
@@ -137,6 +136,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
+        print("--UserSerializer------update", validated_data)
         """Performs an update on a User."""
 
         # Passwords should not be handled with `setattr`, unlike other fields.
@@ -146,6 +146,7 @@ class UserSerializer(serializers.ModelSerializer):
         # `validated_data` dictionary before iterating over it.
         password = validated_data.pop('password', None)
 
+        #print("validated_data.pop --profile-----------", validated_data.pop('profile', {}))
         # Like passwords, we have to handle profiles separately. To do that,
         # we remove the profile data from the `validated_data` dictionary.
         profile_data = validated_data.pop('profile', {})
@@ -163,8 +164,8 @@ class UserSerializer(serializers.ModelSerializer):
         # Finally, after everything has been updated, we must explicitly save
         # the model. It's worth pointing out that `.set_password()` does not
         # save the model.
+        #print("profile_data--------------",profile_data, profile_data.items())
         instance.save()
-
         for (key, value) in profile_data.items():
             # We're doing the same thing as above, but this time we're making
             # changes to the Profile model.

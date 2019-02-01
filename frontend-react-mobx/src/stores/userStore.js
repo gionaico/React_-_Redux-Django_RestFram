@@ -22,7 +22,21 @@ class UserStore {
     console.log(newUser)
     this.updatingUser = true;
     return agent.Auth.save(newUser)
-      .then(action(({ user }) => { this.currentUser = user; }))
+      .then(action(
+         ({ user }) => { 
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 4000,
+          });
+
+          Toast.fire({
+            type: 'success',
+            title: 'Your changes have been made successful'
+          })
+          this.currentUser = user; 
+        }))
       .catch(action((err) => {
         const Toast = Swal.mixin({
           toast: true,

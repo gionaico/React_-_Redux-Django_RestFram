@@ -89,14 +89,14 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
         # Here is that serialize, validate, save pattern we talked about
         # before.
-        print("----")
+        print("----", serializer_data)
         serializer = self.serializer_class(
             request.user, data=serializer_data, partial=True
         )
         print("----222")
         serializer.is_valid(raise_exception=True)
-        
+        print("----333")
         serializer.save()
-        
+        print("----444")
         return Response(serializer.data, status=status.HTTP_200_OK)
 
