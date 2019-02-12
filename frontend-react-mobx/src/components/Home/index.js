@@ -3,20 +3,26 @@ import MainView from './MainView';
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
+import './home.sass';
 
 @inject('commonStore')
 @withRouter
 @observer
 export default class Home extends React.Component {
   componentDidMount() {
-    this.props.commonStore.loadTags();
+    this.props.commonStore.loadCategories();
   }
-
+  
   render() {
-    const { tags, token, appName } = this.props.commonStore;
+    const { categories, isLoadingCategories } = this.props.commonStore;
+    
+    console.log(categories, isLoadingCategories)
+    if (isLoadingCategories)
+        categories.map(i => console.log(i))
+
     return (
       <div className="home-page">
-            <MainView />            
+            <MainView categories={categories}/>            
       </div>
     );
   }

@@ -41,3 +41,15 @@ class Category(TimestampedModel):
 
     def __str__(self):
         return self.category
+
+
+
+class Visited_products(TimestampedModel):
+    user = models.ForeignKey(
+        'profiles.Profile', on_delete=models.CASCADE, related_name='profiles'
+    )
+
+    product = models.ForeignKey(
+        'products.Product', on_delete=models.CASCADE, related_name='products'
+    )
+

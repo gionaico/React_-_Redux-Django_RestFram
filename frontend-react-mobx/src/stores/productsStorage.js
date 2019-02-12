@@ -9,10 +9,15 @@ export class ProductsStore {
   @observable page = 0;
   @observable totalPagesCount = 0;
   @observable predicate = {};
+  @observable productosDeCategoriasRelacionadas = observable.map();
   @observable productsRegistry = observable.map();
   
   @computed get products() {
     return this.productsRegistry.values();
+  };
+
+  @computed get productosDeCategoriasRe() {
+    return this.productosDeCategoriasRelacionadas.values();
   };
 
   clear() {
@@ -23,15 +28,18 @@ export class ProductsStore {
   getProduct(slug) {
     return this.productsRegistry.get(slug);
   }
+  
 
   @action setPage(page) {
     this.page = page;
   }
 
   @action setPredicate(predicate) {
+    alert("predicate")
     if (JSON.stringify(predicate) === JSON.stringify(this.predicate)) return;
     this.clear();
     this.predicate = predicate;
+    console.log("@action setPredicate(predicate) {", this.predicate)
   }
   
   $req() {
@@ -41,6 +49,7 @@ export class ProductsStore {
   }
 
   @action loadProducts() {
+    alert("loadProducts")
     this.isLoading = true;
     return this.$req()
       .then(action( ({ products, productsCount }) => {
@@ -54,6 +63,7 @@ export class ProductsStore {
   }
 
   @action loadProduct(slug, { acceptCached = false } = {}) {
+    
     if (acceptCached) {
       const product = this.getProduct(slug);
       if (product) return Promise.resolve(product);
@@ -62,11 +72,25 @@ export class ProductsStore {
     return agent.Products.get(slug)
       .then(action(({ product }) => {
         this.productsRegistry.set(product.slug, product);
+        console.warn("--------",product.categoryList[0], this.productsRegistry)
         return product;
+      }))
+      .then( product => agent.Products.byCategory(product.categoryList[0]))
+      /* .then((res)=>{
+        this.productosDeCategoriasRelacionadas=res
+        console.log("**************",res, this.productosDeCategoriasRelacionadas)
+        return ""
+      }) */
+      .then(action( productRelacionados  => {
+        this.productosDeCategoriasRelacionadas.clear();
+        console.warn("000000", productRelacionados, productRelacionados.products, this.productosDeCategoriasRelacionadas)
+         productRelacionados.products.forEach(product => this.productosDeCategoriasRelacionadas.set(product.slug, product));
+        return productRelacionados;
       }))
       .finally(action(() => { this.isLoading = false; }));
   }
 
+ 
   @action createProduct(product) {
     return agent.Products.create(product)
       .then(({ product }) => {

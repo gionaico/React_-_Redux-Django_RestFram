@@ -11,6 +11,7 @@ router = DefaultRouter(trailing_slash=False)
 router.register(r'products', ProductViewSet)
 router.register(r'products_Admin', ProductViewSetAdmin)  
 
+#http://0.0.0.0:4000/api/products?category=Php
 urlpatterns = [
     url(r'^', include(router.urls)),
 

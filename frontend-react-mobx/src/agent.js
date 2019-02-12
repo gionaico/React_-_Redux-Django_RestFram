@@ -16,11 +16,12 @@ const handleErrors = err => {
   }
   return err;
 };
+/* http: //0.0.0.0:4000/api/products?category=Javascript&page=1
+http: //0.0.0.0:4000/api/products?category=Javascript&limit=10&offset=10 */
 
-const responseBody = res => res.body;
+const responseBody = res => {console.log(res); return res.body};
 
 const tokenPlugin = req => {
-  console.log(req)
   if (commonStore.token) {
     req.set('authorization', `Token ${commonStore.token}`);
   }
@@ -68,7 +69,7 @@ const Tags = {
   getAll: () => requests.get('/tags')
 };
 
-const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
+const limit = (count, p) => { console.log("---", `limit=${count}&offset=${p ? p * count : 0}`); return `limit=${count}&offset=${p ? p * count : 0}`};
 const omitSlug = article => Object.assign({}, article, { slug: undefined })
 
 const Articles = {
@@ -114,8 +115,12 @@ const Profile = {
     requests.del(`/profiles/${username}/follow`)
 };
 
+/* --------------------------------------------------------------------------------------------- */
 
 
+const Categories = {
+  getAll: () => requests.get('/categories')
+};
 
 const Products = {
   /**
@@ -139,6 +144,7 @@ const Products = {
    * @category tiene que ser uno de los nombres de la DB de lo contrario devuelve un objeto vacio
    * @page La pagina que se quiere visualizar
    * @limit el numero de items por page
+   * http: //0.0.0.0:4000/api/products?category=Php
    * http: //0.0.0.0:4000/api/products?limit=2&offset=1 
    */
   byCategory: (category, page, lim = 10) =>
@@ -186,4 +192,5 @@ export default {
   Comments,
   Profile,
   Tags,
+  Categories
 };

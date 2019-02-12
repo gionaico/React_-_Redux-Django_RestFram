@@ -1,0 +1,101 @@
+
+@import '../variables.css';
+
+.footerContent {
+    display: grid;
+    grid-template-columns: repeat(2, 35% 65%);
+    color: var(--blueGeneral);
+}
+
+.footerContent__newslatter {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footerContent__menu {
+    display: grid;
+    background-color: var(--white);
+    grid-template-columns: repeat(1, 100%);
+    gap: 40px;
+}
+
+.footerContent__eleme {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+    gap: 20px;
+}
+
+.padding {
+    padding: 30px 50px 30px 50px;
+}
+
+.element {
+    height: 45px;
+}
+
+.elementEmail {
+    padding-left: 20px;
+    background-color: var(--blueGeneral);
+    color: var(--white);
+}
+
+.title {
+    color: var(--white);
+    font-size: var(--fontSizeSubtitle);
+}
+
+.elementBtn {
+    font-weight: var(--boldLetters);
+}
+
+.footerContent__img {
+    display: flex;
+}
+
+.imgSociale {
+    width: 20px;
+}
+
+.footerContent__imgSociales {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.footerContent__imgSocialesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+}
+
+.imgEmpresa {
+    height: 60px;
+}
+
+.footerContent__linksGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    gap: 30px;
+}
+
+.footerContent__linksGrid>a {
+    text-align: center;
+    color: var(--blueGeneral);
+}
+
+.textregistro {
+    font-size: 10px;
+    color: var(--textGeneral);
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .footerContent {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footerContent__linksGrid {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+}

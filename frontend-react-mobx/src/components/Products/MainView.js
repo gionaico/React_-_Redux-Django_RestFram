@@ -30,7 +30,7 @@ export default class MainView extends React.Component {
 
   render() {
     const { products, isLoading, page, totalPagesCount } = this.props.productsStorage;
-    console.log(products, isLoading, page, totalPagesCount)
+    console.log(products)
     
     
     return (
