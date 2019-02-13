@@ -5,6 +5,7 @@ import { HashRouter } from 'react-router-dom';
 import { useStrict } from 'mobx';
 import { Provider } from 'mobx-react';
 import DevTools from 'mobx-react-devtools'
+import firebase from 'firebase'
 
 import App from './components/App';
 
@@ -27,6 +28,16 @@ const stores = {
   userStore,
   profileStore,
 };
+
+firebase.initializeApp({
+    apiKey: "AIzaSyALE9IKqhLrVNpePEsYJTUolWWFPT3AtZ0",
+    authDomain: "django-react-cursos.firebaseapp.com",
+    databaseURL: "https://django-react-cursos.firebaseio.com",
+    projectId: "django-react-cursos",
+    storageBucket: "django-react-cursos.appspot.com",
+    messagingSenderId: "320584218024"
+})
+
 
 // For easier debugging
 window._____APP_STATE_____ = stores;

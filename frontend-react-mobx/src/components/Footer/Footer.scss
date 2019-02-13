@@ -1,10 +1,10 @@
 
-@import '../variables.css';
+@import "../../styles.sass";
 
 .footerContent {
     display: grid;
     grid-template-columns: repeat(2, 35% 65%);
-    color: var(--blueGeneral);
+    color: $primary-color;
 }
 
 .footerContent__newslatter {
@@ -15,7 +15,7 @@
 
 .footerContent__menu {
     display: grid;
-    background-color: var(--white);
+    background-color: $element-bck!important;
     grid-template-columns: repeat(1, 100%);
     gap: 40px;
 }
@@ -36,17 +36,17 @@
 
 .elementEmail {
     padding-left: 20px;
-    background-color: var(--blueGeneral);
-    color: var(--white);
+    background-color: $primary-color;
+    color: $element-bck!important;
 }
 
 .title {
-    color: var(--white);
-    font-size: var(--fontSizeSubtitle);
+    color: $element-bck!important;
+    font-size: $font-size-subtitle;
 }
 
 .elementBtn {
-    font-weight: var(--boldLetters);
+    font-weight: $font-with-bold;
 }
 
 .footerContent__img {
@@ -81,12 +81,12 @@
 
 .footerContent__linksGrid>a {
     text-align: center;
-    color: var(--blueGeneral);
+    color: $primary-color;
 }
 
 .textregistro {
     font-size: 10px;
-    color: var(--textGeneral);
+    color: $secondary-color;
     text-align: justify;
 }
 

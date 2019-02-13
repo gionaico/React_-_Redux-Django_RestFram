@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
 
+    'graphene_django',
+
     'conduit.apps.articles',
     'conduit.apps.contact',
     'conduit.apps.authentication',
@@ -50,6 +52,10 @@ INSTALLED_APPS = [
     'conduit.apps.profiles',
     'conduit.apps.products',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'conduit.schema',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

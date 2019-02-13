@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +28,9 @@ urlpatterns = [
     url(r'^api/', include('conduit.apps.contact.urls', namespace='contact')),    
     
     url(r'^api/', include('conduit.apps.products.urls', namespace='products')),    
+    url(r'^graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
+
+    url(r'^gql', csrf_exempt(GraphQLView.as_view(batch=True))),
+
+    
 ]

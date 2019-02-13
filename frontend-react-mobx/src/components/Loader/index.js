@@ -5,7 +5,7 @@ const Loader = ({prueba}) => {
     const [open, setOpen] = useState(false)
     //const prueba = useRef();
     return (
-        <section class="svg">
+        <section className="svg">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 213.235 241.176" enable-background="new 0 0 213.235 241.176" space="preserve" fill="#0057B8">                
                     <path d="M108.581,64.968V14.124l44.007,25.422L108.581,64.968"/>
