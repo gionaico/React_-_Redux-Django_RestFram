@@ -46,7 +46,7 @@ class Footer extends React.Component {
     };
     
     return (
-      <div className="footerContent">
+      <section className="footerContent">
         
         <div style={bgStyle} className="footerContent__newslatter">
           <div className="footerContent__eleme padding">
@@ -59,7 +59,7 @@ class Footer extends React.Component {
         <div className="footerContent__menu padding">
           
           <div className="footerContent__img">
-            <img className="imgEmpresa" src={logo_texto_color}></img>
+            <img className="imgEmpresa" src=""></img>
             <div className="footerContent__imgSociales">
               <div className="footerContent__imgSocialesGrid">
                 <img className="imgSociale" src={social_facebook}></img>
@@ -101,10 +101,10 @@ class Footer extends React.Component {
           </div>
 
           <div className="registro">
-            <span className="textregistro">© Inscrita en el Reg. Mercantil de Valencia, Tomo 7020, Libro 4323, Folio 205, Sec. 8, Hoja V-80116, C.I.F. B-97.141.410. Inscrita en el Registro General de Empresas de Venta a Distancia del Ministerio de Industria, Comercio y Turismo, con el número (NEVA) 2002/0300/10/46/9/V. GRUTINET, GRUTINET MOVEMOS TUS VENTAS y GRUTICASH son marcas registradas por GRUTINET, S.L.</span>
+            <address className="textregistro"> ©Inscrita en el Reg.Mercantil de Valencia, Tomo 7020, Libro 4323, Folio 205, Sec.8, Hoja V - 80116, C.I.F.B - 97.141 .410.Inscrita en el Registro General de Empresas de Venta a Distancia del Ministerio de Industria, Comercio y Turismo, con el número(NEVA) 2002 / 0300 / 10 / 46 / 9 / V.GRUTINET, GRUTINET MOVEMOS TUS VENTAS y GRUTICASH son marcas registradas por GRUTINET, S.L. </address>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

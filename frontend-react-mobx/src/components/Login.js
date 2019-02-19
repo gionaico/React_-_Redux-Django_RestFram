@@ -2,6 +2,7 @@ import { withRouter, Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import firebase from 'firebase'
 
 @inject('authStore')
 @withRouter
@@ -20,11 +21,34 @@ export default class Login extends React.Component {
       .then(() => this.props.history.replace('/'));
   };
 
+  
+  handleAuth = ()=> {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    provider.addScope('https://www.googleapis.com/auth/plus.login')
+    const authStore = this.props.authStore
+    firebase.auth().signInWithPopup(provider)
+      .then(result => {
+        console.log(`${result.user.email} ha iniciado sesión`, result)
+        authStore.setEmail(result.user.email);
+        authStore.setPassword(result.additionalUserInfo.profile.id);
+        
+        authStore.socialLogin({
+          email: result.user.email,
+          password: result.additionalUserInfo.profile.id,
+          username: result.additionalUserInfo.profile.id,
+          token: result.credential.idToken
+        }).then(() => console.warn("yesssssssssssssssssss"));
+        
+      })
+      .catch(error => console.log(`Error ${error.code}: ${error.message}`))
+  }
+
   render() {
     const { values, errors, inProgress } = this.props.authStore;
 
     return (
       <div className="auth-page">
+      
         <div className="container page">
           <div className="row">
 
@@ -71,6 +95,11 @@ export default class Login extends React.Component {
 
                 </fieldset>
               </form>
+
+              <button
+                className='waves-effect waves-light btn blue darken-1'
+                onClick={this.handleAuth}>Login
+              </button>
             </div>
 
           </div>

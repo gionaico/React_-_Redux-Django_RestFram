@@ -27,3 +27,18 @@ export default class Products extends React.Component {
     );
   }
 }
+
+//serializer = RegistrationSerializer(data={u'username': u'yomogan', u'password': u'yy', u'email': u'yomogan@gmail.com'})
+/* 
+
+python manage.py shell
+from rest_framework import serializers
+from conduit.apps.authentication.serializers import SocialLoginSerializer
+serializer = SocialLoginSerializer(data={u'username': u'yy', u'password': u'yy', u'email': u'gionaico@gmail.com'})
+serializer.is_valid(raise_exception = True)
+
+
+serializer.data
+serializer.error
+ */
+

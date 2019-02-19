@@ -22,6 +22,7 @@ function SampleNextArrow(props) {
     <img src={arrow_r} 
       className={className}
       onClick={onClick}
+      alt="Ir a la siguiente"
     />
   );
 }
@@ -32,6 +33,7 @@ function SamplePrevArrow(props) {
     <img src={arrow_l}
       className={className}
       onClick={onClick}
+      alt="Ir a la anterior"
     />
   );
 }
@@ -82,17 +84,6 @@ export default class MainView extends React.Component {
   constructor(props){
     super()
     this.filterProducts = this.filterProducts.bind(this)
-  }
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-    /* this.props.articlesStore.loadArticles(); */
-  }
-
-  componentDidUpdate(previousProps) {
-    
   }
 
   filterProducts(category) {

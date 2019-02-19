@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom'
 import Hero from '../Hero';
 import Loader from '../Loader';
 import banner from './media/contacto_bg.png'
+import "./products-details.scss";
 
 function SampleNextArrow(props) {
   const { className,  onClick } = props;
@@ -16,6 +17,7 @@ function SampleNextArrow(props) {
     <img src={arrow_r} 
       className={className}
       onClick={onClick}
+      alt = "Ir a la siguiente"
     />
   );
 }
@@ -26,6 +28,7 @@ function SamplePrevArrow(props) {
     <img src={arrow_l}
       className={className}
       onClick={onClick}
+      alt = "Ir a la anterior"
     />
   );
 }
@@ -122,23 +125,23 @@ export default class ProductDetails extends React.Component {
         <Hero title="Detalle de producto" bg={banner}/>
 
         
-        <section>          
-          <img src={product.image}/> 
-          <div>
-              <p>
-                <strong>Nombre del curso:</strong>{product.name}
+        <section class="product-section">          
+          <img class="product-section__img" src={product.image} alt={product.slug}/> 
+          <div class="product-section__inform">
+              <p class="product-section__text">
+                <strong class="product-section__strong">Nombre del curso:</strong>{product.name}
               </p>
 
-              <p>
-                <strong>Precio del curso:</strong>{product.price}
+              <p class="product-section__text">
+                <strong class="product-section__strong">Precio del curso:</strong>{product.price}
               </p>
 
-              <p>
-                <strong>Usuario creador del curso:</strong>{product.saler.username}
+              <p class="product-section__text">
+                <strong class="product-section__strong">Usuario creador del curso:</strong>{product.saler.username}
               </p>
 
-              <p>
-                <strong>Descripcion:</strong>{product.description}
+              <p class="product-section__text">
+                <strong class="product-section__strong">Descripcion:</strong>{product.description}
               </p>
           </div>
         </section>

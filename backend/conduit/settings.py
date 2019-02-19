@@ -51,10 +51,11 @@ INSTALLED_APPS = [
     'conduit.apps.core',
     'conduit.apps.profiles',
     'conduit.apps.products',
+    'conduit.apps.ingredients',
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'conduit.schema',
+    'SCHEMA': 'conduit.apps.ingredients.schema.schema',
 }
 
 MIDDLEWARE = [

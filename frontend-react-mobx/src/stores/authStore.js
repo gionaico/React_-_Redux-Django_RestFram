@@ -45,6 +45,20 @@ class AuthStore {
       .finally(action(() => { this.inProgress = false; }));
   }
 
+  @action socialLogin(data) {
+    console.error("dentro yeeee", data)
+    this.inProgress = true;
+    this.errors = undefined;
+    return agent.Auth.socialLogin(data)
+      .then(({user}) => commonStore.setToken(user.token))
+      .then(() => userStore.pullUser())
+      .catch(action((err) => {
+        this.errors = err.response && err.response.body && err.response.body.errors;
+        throw err;
+      }))
+      
+  }
+
   @action register() {
     this.inProgress = true;
     this.errors = undefined;

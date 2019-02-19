@@ -21,9 +21,9 @@ export default class Home extends React.Component {
         categories.map(i => console.log(i))
 
     return (
-      <div className="home-page">
+      <section className="home-page">
             <MainView categories={categories}/>            
-      </div>
+      </section>
     );
   }
 }
