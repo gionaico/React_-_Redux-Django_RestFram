@@ -28,7 +28,12 @@
 @media (max-width: $screen-sm-min) {
     .product-section {
         grid-template-columns: 1fr;
-        gap: $general-gap;
+    }
+}
+
+@media print {
+    .product-section {
+        grid-template-columns: 1fr;
     }
 }
 

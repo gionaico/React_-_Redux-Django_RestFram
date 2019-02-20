@@ -62,6 +62,16 @@ $listColors: #F11E4A, #F8A527, #266D7F, #82A, $firstColor
 $delayCoeff: 0.1s 
 
 
+/* Mixings
+  * ======================================================================== */  
+@mixin border-c($color) 
+    border-color: $color
+
+
+@mixin color($color) 
+    color: $color
+
+
 /* General definitions
   * ======================================================================== */
 html
@@ -79,23 +89,23 @@ p
   font-size: $font-size-text
   font-family: $font-family-base
   font-weight: $font-with-slim
-  color: $secondary-color
+  @include color($secondary-color)
 
 a:link
   text-decoration: none
  
 .title
-  color: $primary-color
+  @include color($primary-color)
   font-weight: $font-with-bold
   font-size: $font-size-title
 
 .subtitle
-  color: $secondary-color
+  @include color($secondary-color)
   font-weight: $font-with-slim
   font-size: $font-size-subtitle
 
 .text
-  color: $secondary-color
+  @include color($secondary-color)
   font-weight: $font-with-slim
   font-size: $font-size-text
 
@@ -116,3 +126,12 @@ a:link
   -webkit-box-shadow: 0px 0px 15px 15px $orange
   transform: rotate(360deg)
   -webkit-transform: rotate(360deg)
+
+
+
+
+@media print 
+    header .footerContent
+      display: none
+    
+

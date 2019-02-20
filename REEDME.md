@@ -52,12 +52,15 @@ D
         /src/componets/loader/loader.scss,
         /src/componets/loader/index.js,
         
-    Efecto acordeos
+    Efecto acordeon
+        Las imagenes tienen un efecto acordeos segun pasemos sobre ellas
         /src/componets/MainBanner/MainBanner.sass,
-    Efecto Paradax
-        /**********por hacer
-    Efecto Imagenes de las fotos
-        /**********por hacer
+    Efecto Saturation
+        La imagen toma unos bordes y la satura para crear un mayor contraste 
+        /src/components/Home/home.sass  .imgCarrusel
+    Efecto con Transition
+        Expande la imagen al hacer hover sobre la imagen
+        /src/components/Products/products.sass  .products-container__img
 
     Grid/Flex
         Grid-Layout (auto-fill, auto-fit, gap ...)
@@ -67,8 +70,11 @@ D
         /src/components/Hero/Hero.sass
         /src/components/Loader/loader.scss
     
-    mediaQueries
+    MediaQueries (print/min/max)
+        Al ser un proyecto sin aun mucha envergadura no me ha sido necesario usar tanto el tema de media queries ya que en su lugar uso grid-templeate-columns seguido por repeat(auto-fill .....) esto hace que el control con las unidades "fr" me facilite el tema de la distrubucion de los elementos cuando la pantalla crece o disminuye. En cuanto al tema de queries to print si que provoca que oculte el menu y el footer y que distrubuya unos cuantos elementos usando la media query especifica.
         /src/components/ProductDetails/products-details.scss
+        /src/components/Home/home.sass
+        /src/styles.sass
     
     BEM
         /src/componets/products/products.sass,
@@ -81,6 +87,13 @@ D
 
         
 
+
+
+<picture>
+    <source srcset="smaller.jpg, smaller_retina.jpg 2x" media="(max-width: 768px)">
+    <source srcset="default.jpg, default_retina.jpg 2x">
+    <img srcset="default.jpg, default_retina.jpg 2x" alt="My default image">
+</picture>
 
     mejoras
 

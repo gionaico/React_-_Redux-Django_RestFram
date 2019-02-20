@@ -65,12 +65,12 @@ export default class App extends React.Component {
       return (
         <div>
           <Header />
-          <button
+          {/* <button
             className='waves-effect waves-light btn blue darken-1'
             onClick={this.handleAuth}
           >
             Login
-          </button>
+          </button> */}
           <Switch>
             <Route path="/products" component={Products} />
             <Route path="/product/:id" component={ProductDetails} />

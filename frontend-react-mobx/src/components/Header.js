@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+const urlPublicMedia = "/media"
+
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -92,7 +94,11 @@ class Header extends React.Component {
         <div className="container">
 
           <Link to="/" className="navbar-brand">
-            {this.props.commonStore.appName.toLowerCase()}
+            <picture>
+              <source media="(min-width: 650px)" srcset={`${urlPublicMedia}/favicon/returnlearning-200px.png`}/>
+              <source media="(min-width: 465px)" srcset={`${urlPublicMedia}/favicon/returnlearning150px.png`}/>
+              <img src={`${urlPublicMedia}/favicon/favicon-96x96.png`} alt="Logo Return Learning" styles="width:auto;"/>
+            </picture> 
           </Link>
 
           <LoggedOutView currentUser={this.props.userStore.currentUser} />

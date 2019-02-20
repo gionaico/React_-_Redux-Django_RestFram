@@ -135,7 +135,7 @@ export default class MainView extends React.Component {
           <Slider {...settings}>
             {this.props.categories.map((ic, i) => (
               <div key={i} className="prueba divTimelineElem">
-                <img className="imgCarrusel" src={`${urlPublicMedia}/${ic.toLowerCase()}.jpg`} alt="" />
+                <Link to="/products" onClick={()=>this.filterProducts(ic)}><img className="imgCarrusel" src={`${urlPublicMedia}/${ic.toLowerCase()}.jpg`} alt={"Pincha pa ir a la categoria de "+ic} /></Link>
                 <Link to="/products" onClick={()=>this.filterProducts(ic)}><p className="textYear">{ic}</p></Link>                
               </div>
             ))}          

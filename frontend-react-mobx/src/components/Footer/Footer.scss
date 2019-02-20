@@ -4,7 +4,7 @@
 .footerContent {
     display: grid;
     grid-template-columns: repeat(2, 35% 65%);
-    color: $primary-color;
+    @include color($primary-color);
 }
 
 .footerContent__newslatter {
@@ -79,14 +79,26 @@
     gap: 30px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 .footerContent__linksGrid>a {
     text-align: center;
-    color: $primary-color;
+    @include color($primary-color)
 }
 
 .textregistro {
     font-size: 10px;
-    color: $secondary-color;
+    @include color($secondary-color);
     text-align: justify;
 }
 
