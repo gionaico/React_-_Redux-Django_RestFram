@@ -1,13 +1,13 @@
+import '../assets/styles/burguer-menu.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-const urlPublicMedia = "/media"
-
+const URL_PUBLIC_MEDIA = "/media/favicon"
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="list">
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
@@ -42,7 +42,7 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="list">
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
@@ -90,16 +90,18 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div className="container">
+      <nav className="">{/* margin-top: 150px               da color al texto del menu*/}
+        <div className="menu ">{/*container               centra el texto*/}
 
           <Link to="/" className="navbar-brand">
             <picture>
-              <source media="(min-width: 650px)" srcset={`${urlPublicMedia}/favicon/returnlearning-200px.png`}/>
-              <source media="(min-width: 465px)" srcset={`${urlPublicMedia}/favicon/returnlearning150px.png`}/>
-              <img src={`${urlPublicMedia}/favicon/favicon-96x96.png`} alt="Logo Return Learning" styles="width:auto;"/>
+              <source media="(min-width: 650px)" srcset={`${URL_PUBLIC_MEDIA}/returnlearning-200px.png`}/>
+              <source media="(min-width: 465px)" srcset={`${URL_PUBLIC_MEDIA}/returnlearning150px.png`}/>
+              <img src={`${URL_PUBLIC_MEDIA}/favicon-96x96.png`} alt="Logo Return Learning" styles="width:auto;"/>
             </picture> 
           </Link>
+          <input class="list-btn" type="checkbox" id="list-btn" />
+          <label class="list-icon" for="list-btn"><span class="navicon"></span></label>
 
           <LoggedOutView currentUser={this.props.userStore.currentUser} />
 

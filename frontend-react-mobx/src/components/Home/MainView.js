@@ -129,18 +129,19 @@ export default class MainView extends React.Component {
 
         <MainBanner list={listMainBanner}/>    
 
-        <Page title="este es un titulo" html="texto html" subtitle="este es un subtitulo"/>
-
-        <div className="containerSlider" style={{padding:"30px"}}>
-          <Slider {...settings}>
-            {this.props.categories.map((ic, i) => (
-              <div key={i} className="prueba divTimelineElem">
-                <Link to="/products" onClick={()=>this.filterProducts(ic)}><img className="imgCarrusel" src={`${urlPublicMedia}/${ic.toLowerCase()}.jpg`} alt={"Pincha pa ir a la categoria de "+ic} /></Link>
-                <Link to="/products" onClick={()=>this.filterProducts(ic)}><p className="textYear">{ic}</p></Link>                
-              </div>
-            ))}          
-          </Slider>
-        </div>
+        <section className="categorias-sugeridas">
+          <Page title="Nuestros cursos por categorias" />
+          <div className="containerSlider" style={{padding:"30px"}}>
+            <Slider {...settings}>
+              {this.props.categories.map((ic, i) => (
+                <div key={i} className="prueba divTimelineElem">
+                  <Link to="/products" onClick={()=>this.filterProducts(ic)}><img className="imgCarrusel" src={`${urlPublicMedia}/${ic.toLowerCase()}.jpg`} alt={"Pincha pa ir a la categoria de "+ic} /></Link>
+                  <Link to="/products" onClick={()=>this.filterProducts(ic)}><p className="textYear">{ic}</p></Link>                
+                </div>
+              ))}          
+            </Slider>
+          </div>
+        </section>
      
       </div>
     );

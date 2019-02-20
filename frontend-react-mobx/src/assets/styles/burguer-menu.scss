@@ -1,0 +1,150 @@
+@import "../../styles.sass";
+
+
+nav{
+    width: 100%;
+    background-color: $element-bck;
+}
+
+a{
+  color: $primary-color;
+}
+
+a:hover{
+  color: $orange;
+}
+/* menu */
+
+.menu {
+    background-color: $element-bck;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+    //position: fixed;
+    z-index: 3;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:5%;
+    padding-left:5%;
+}
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: $element-bck;
+}
+
+.menu li a {
+    display: block;
+    padding: 20px 20px;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
+}
+
+.menu li a:hover,
+.menu .menu-btn:hover {
+    background-color: #f4f4f4;
+}
+
+.menu .logo {
+    display: block;
+    float: left;
+    font-size: 2em;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+/* menu */
+
+.menu .list {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.menu .list-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+
+.menu .list-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+
+.menu .list-icon .navicon:before,
+.menu .list-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.menu .list-icon .navicon:before {
+    top: 5px;
+}
+
+.menu .list-icon .navicon:after {
+    top: -5px;
+}
+
+/* menu btn */
+
+.menu .list-btn {
+    display: none;
+}
+
+.menu .list-btn:checked~.list {
+    max-height: 240px;
+}
+
+.menu .list-btn:checked~.list-icon .navicon {
+    background: transparent;
+}
+
+.menu .list-btn:checked~.list-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.menu .list-btn:checked~.list-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.menu .list-btn:checked~.list-icon:not(.steps) .navicon:before,
+.menu .list-btn:checked~.list-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+
+/* $screen-md-min = 992px */
+
+@media (min-width:$screen-md-min ) {
+    .list li {
+        float: left;
+    }
+
+    .list li a {
+        padding: 20px 30px;
+    }
+
+    .menu .list {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+
+    .menu .list-icon {
+        display: none;
+    }
+}

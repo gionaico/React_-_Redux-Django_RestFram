@@ -8,6 +8,7 @@ import social_facebook from './media/social_facebook.svg';
 import newsletter from './media/newsletter.png'
 import social_instagram from './media/social_instagram.svg';
 import social_twitter from './media/social_twitter.svg';
+const URL_PUBLIC_MEDIA = "/media/favicon"
 
 let regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i
 
@@ -59,7 +60,7 @@ class Footer extends React.Component {
         <div className="footerContent__menu padding">
           
           <div className="footerContent__img">
-            <img className="imgEmpresa" src=""></img>
+            <img className="imgEmpresa" src={`${URL_PUBLIC_MEDIA}/returnlearning300px.png`}></img>
             <div className="footerContent__imgSociales">
               <div className="footerContent__imgSocialesGrid">
                 <img className="imgSociale" src={social_facebook}></img>

@@ -32,6 +32,7 @@ D
         nav ==> /src/componets/header.js, 
         section ==> /src/componets/loader/index.js   /src/componets/footer/index.js,,
         address ==> /src/componets/footer/index.js,
+        picture ==> /src/components/Header.js
     
     Humans.txt/Robots.txt ==> /public
 
@@ -55,9 +56,11 @@ D
     Efecto acordeon
         Las imagenes tienen un efecto acordeos segun pasemos sobre ellas
         /src/componets/MainBanner/MainBanner.sass,
+
     Efecto Saturation
         La imagen toma unos bordes y la satura para crear un mayor contraste 
         /src/components/Home/home.sass  .imgCarrusel
+        
     Efecto con Transition
         Expande la imagen al hacer hover sobre la imagen
         /src/components/Products/products.sass  .products-container__img
