@@ -76,71 +76,220 @@ const SETTINGS_SLIDER = {
 @observer
 export default class ProductDetails extends React.Component {
   
-  constructor(props) {
-    super(props)
-    this.slug=this.props.match.params.id;
-    this.state = {
-      textComment:""
-    };
-    this.handleClick = this.handleClick.bind(this);
-    this.product
-  }
-
-  componentDidMount() {
-    /* alert("componentDidMount") */
-    this.props.productsStorage.loadProduct(this.slug, { acceptCached: true });
-  }
-  componentWillUpdate(newProps) {
-    const { match } = this.props;
-    const prevPostId = match.params.id;
-    const nextPostId = newProps.match.params.id;
-    if(nextPostId && prevPostId !== nextPostId){
-      this.slug = newProps.match.params.id;
-      this.props.productsStorage.loadProduct(this.slug, { acceptCached: true });
-    }
-  }
-
-  handleClick(product, user) {
-    console.log(product, user)
-    if (user) {
-      this.props.productsStorage.Comentar(product.slug, { body: this.state.textComment });
-      this.setState({textComment: ""});
-    }else{
-       const Toast = Swal.mixin({
-         toast: true,
-         position: 'center',
-         showConfirmButton: false,
-         timer: 5000,
-       });
-
-       Toast.fire({
-         type: 'error',
-         title: 'You need to login in before to do a comment'
-       })
-    }
-  }
-  
-  handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-  }
 
   render() {
-    const {  userStore } = this.props;
-    const { currentUser } = userStore;
-    const product = this.props.productsStorage.getProduct(this.slug);
-    const {
-      productosDeCategoriasRe,
-      isLoading,
-      comentariosAll
-    } = this.props.productsStorage;
+    
     let slider, comments;
-    if (isLoading) return (<Loader prueba="pooopo"/>)
-    if (!product) return (<RedError message="Can't load product" />);
     
-    if (!comentariosAll) return ( < RedError message = "Can't load product"/> );
-    
-    console.log("-+++++++++++++ comentariosAll", comentariosAll, "-+++++++++++++", currentUser, productosDeCategoriasRe)
 
+    
+    const  product= {
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "AngularJS desde 0",
+        "price": "18.00",
+        "description": "Aprende un de los frameworks mas populares.",
+        "slug": "AngularJS",
+        "image": "https://as2.ftcdn.net/jpg/00/73/01/33/500_F_73013357_eDyPWw1tmiYMuGQW4BW71FKEdQG8MF3r.jpg",
+        "categoryList": ["Javascript", "Informatica"],
+        "createdAt": "2019-01-27T22:34:50.228101+00:00",
+        "updatedAt": "2019-01-27T22:34:50.228144+00:00"
+      }
+    
+    
+     const productosDeCategoriasRe= [{
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "NodeJS",
+        "price": "35.00",
+        "description": "Aprende nodeJS en empieza a trabajar en backend",
+        "slug": "NodeJS-basico",
+        "image": "https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_960_720.png",
+        "categoryList": ["Javascript", "Informatica"],
+        "createdAt": "2019-01-27T22:36:39.355837+00:00",
+        "updatedAt": "2019-01-27T22:36:39.355867+00:00"
+      }, {
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "AngularJS desde 0",
+        "price": "18.00",
+        "description": "Aprende un de los frameworks mas populares.",
+        "slug": "AngularJS",
+        "image": "https://as2.ftcdn.net/jpg/00/73/01/33/500_F_73013357_eDyPWw1tmiYMuGQW4BW71FKEdQG8MF3r.jpg",
+        "categoryList": ["Javascript", "Informatica"],
+        "createdAt": "2019-01-27T22:34:50.228101+00:00",
+        "updatedAt": "2019-01-27T22:34:50.228144+00:00"
+      }, {
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "Material-ui",
+        "price": "50.00",
+        "description": "Conviertete en un experto manejando material ui",
+        "slug": "CSS3-Material-ui",
+        "image": "https://cdn.pixabay.com/photo/2016/08/04/10/37/office-1568780_960_720.jpg",
+        "categoryList": ["Javascript", "Informatica"],
+        "createdAt": "2019-01-27T22:31:56.372206+00:00",
+        "updatedAt": "2019-01-27T22:31:56.372239+00:00"
+      }, {
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "Curso de jquery",
+        "price": "15.99",
+        "description": "este es un curso para aquellos que deseen obtener conocimientos sobre esta tecnologia enfocada a la telefonia movil.",
+        "slug": "Jquery_para_movil",
+        "image": "https://cdn.pixabay.com/photo/2014/09/14/01/13/jquery-444684_960_720.png",
+        "categoryList": ["Javascript"],
+        "createdAt": "2019-01-20T17:19:12.739312+00:00",
+        "updatedAt": "2019-01-20T17:19:12.739462+00:00"
+      }, {
+        "saler": {
+          "username": "gionaico",
+          "bio": "",
+          "image": "",
+          "following": false
+        },
+        "name": "Javascript para princcipientes",
+        "price": "9.99",
+        "description": "Este curso va dirigido a aquellas personas que quieren iniciarse en el mundo de la programacion web.",
+        "slug": "Programacion_javascript",
+        "image": "https://cdn.pixabay.com/photo/2016/08/04/10/37/office-1568780_960_720.jpg",
+        "categoryList": ["Javascript"],
+        "createdAt": "2019-01-20T16:36:47.115718+00:00",
+        "updatedAt": "2019-01-20T16:36:47.115748+00:00"
+      }]
+    
+      const comentariosAll=[{
+          "id": 12,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "hola mundo",
+          "createdAt": "2019-02-22T15:39:55.929990+00:00",
+          "updatedAt": "2019-02-22T15:39:55.930042+00:00"
+        }, {
+          "id": 11,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "ssssssssssss",
+          "createdAt": "2019-02-22T15:33:23.262110+00:00",
+          "updatedAt": "2019-02-22T15:33:23.262153+00:00"
+        }, {
+          "id": 9,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "hola prueba 5",
+          "createdAt": "2019-02-22T02:24:43.122774+00:00",
+          "updatedAt": "2019-02-22T02:24:43.122808+00:00"
+        }, {
+          "id": 8,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "fgdfgdf",
+          "createdAt": "2019-02-22T02:23:16.824195+00:00",
+          "updatedAt": "2019-02-22T02:23:16.824243+00:00"
+        }, {
+          "id": 7,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "dsfsdgghfghfgh",
+          "createdAt": "2019-02-22T02:22:53.062950+00:00",
+          "updatedAt": "2019-02-22T02:22:53.063004+00:00"
+        }, {
+          "id": 6,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "ssssssssssssssssssssssss",
+          "createdAt": "2019-02-22T02:19:38.728023+00:00",
+          "updatedAt": "2019-02-22T02:19:38.728070+00:00"
+        }, {
+          "id": 5,
+          "saler": {
+            "username": "uno",
+            "bio": "",
+            "image": "https://api.adorable.io/avatars/285/i.png",
+            "following": false
+          },
+          "body": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed minus adipisci cumque, explicabo natus veritatis officia maxime deserunt nulla hic, beatae provident? Quam neque vitae eius veritatis voluptatibus quisquam consequuntur?",
+          "createdAt": "2019-02-21T01:36:23.027325+00:00",
+          "updatedAt": "2019-02-21T01:36:23.027358+00:00"
+        }, {
+          "id": 4,
+          "saler": {
+            "username": "a",
+            "bio": "",
+            "image": "https://api.adorable.io/avatars/285/i.png",
+            "following": false
+          },
+          "body": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed minus adipisci cumque, explicabo natus veritatis officia maxime deserunt nulla hic, beatae provident? Quam neque vitae eius veritatis voluptatibus quisquam consequuntur?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed minus adipisci cumque, explicabo natus veritatis officia maxime deserunt nulla hic, beatae provident? Quam neque vitae eius veritatis voluptatibus quisquam consequuntur?",
+          "createdAt": "2019-02-21T01:36:02.916300+00:00",
+          "updatedAt": "2019-02-21T01:36:02.916336+00:00"
+        }, {
+          "id": 3,
+          "saler": {
+            "username": "prueba15",
+            "bio": "sxdazvf",
+            "image": "https://api.adorable.io/avatars/285/i.png",
+            "following": false
+          },
+          "body": "Lorem ipsum dolor sit amet consectetur, adipisicin",
+          "createdAt": "2019-02-21T01:35:47.948762+00:00",
+          "updatedAt": "2019-02-21T01:35:47.948835+00:00"
+        }, {
+          "id": 2,
+          "saler": {
+            "username": "prueba10",
+            "bio": "",
+            "image": "https://cdn.pixabay.com/photo/2016/12/29/12/20/woman-1938429_960_720.jpg",
+            "following": false
+          },
+          "body": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed minus adipisci cumque, explicabo natus veritatis officia maxime deserunt nulla hic, beatae provident? Quam neque vitae eius veritatis voluptatibus quisquam consequuntur?",
+          "createdAt": "2019-02-21T01:35:23.626725+00:00",
+          "updatedAt": "2019-02-21T01:35:23.626754+00:00"
+        }]
+      
 
     if (productosDeCategoriasRe) { //&& productosDeCategoriasRe.length>2
       slider=(
@@ -171,8 +320,8 @@ export default class ProductDetails extends React.Component {
               <span className={`${(key+1)%2==0?"p1":"p2"}`}>{item.saler.username}</span>
             </div>)}
 
-            <textarea value={this.state.textComment} name="textComment" onChange={(e)=>this.handleChange(e)} rows="4" cols="50"></textarea>            
-            <button type="button" onClick={()=>this.handleClick(product, currentUser)} class="btn btn-large btn-block btn-primary">Enviar</button>
+            <textarea  name="textComment" rows="4" cols="50"></textarea>            
+            <button type="button" class="btn btn-large btn-block btn-primary">Enviar</button>
             
             
         </div>)

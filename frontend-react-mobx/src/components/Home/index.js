@@ -9,17 +9,16 @@ import './home.sass';
 @withRouter
 @observer
 export default class Home extends React.Component {
-  componentDidMount() {
-    this.props.commonStore.loadCategories();
-  }
-  
   render() {
-    const { categories, isLoadingCategories } = this.props.commonStore;
-    
-    console.log(categories, isLoadingCategories)
-    if (isLoadingCategories)
-        categories.map(i => console.log(i))
-
+    const categories = [
+        "Php",
+        "Javascript",
+        "Programacion C",
+        "Audio",
+        "Elctrodomesticos",
+        "Informatica"
+      ];
+      
     return (
       <section className="home-page">
             <MainView categories={categories}/>            

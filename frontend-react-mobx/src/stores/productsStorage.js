@@ -41,7 +41,7 @@ export class ProductsStore {
   }
 
   @action setPredicate(predicate) {
-    alert("predicate")
+    //alert("predicate")
     if (JSON.stringify(predicate) === JSON.stringify(this.predicate)) return;
     this.clear();
     this.predicate = predicate;
@@ -55,7 +55,7 @@ export class ProductsStore {
   }
 
   @action loadProducts() {
-    alert("loadProducts")
+    //alert("loadProducts")
     this.isLoading = true;
     return this.$req()
       .then(action( ({ products, productsCount }) => {

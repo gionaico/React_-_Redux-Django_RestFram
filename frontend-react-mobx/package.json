@@ -12,6 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
+    "express": "^4.16.4",
     "firebase": "^5.8.2",
     "history": "4.7.2",
     "marked": "^0.3.6",
@@ -39,6 +40,7 @@
     "eject": "react-scripts eject",
     "doc": "jsdoc -c jsdoc.json README.md src/*",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "nod": "node serve.js"
   }
 }

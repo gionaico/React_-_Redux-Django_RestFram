@@ -16,18 +16,6 @@ const LoggedOutView = props => {
         </li>
 
         <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Sign in
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Sign up
-          </Link>
-        </li>
-
-        <li className="nav-item">
           <Link to="/products" className="nav-link">
             Products
           </Link>
@@ -97,9 +85,9 @@ class Header extends React.Component {
           <input className="list-btn" type="checkbox" id="list-btn" />
           <label className="list-icon" htmlFor="list-btn"><span className="navicon"></span></label>
 
-          <LoggedOutView currentUser={this.props.userStore.currentUser} />
+          <LoggedOutView currentUser={false} />
 
-          <LoggedInView currentUser={this.props.userStore.currentUser} />
+          
         </div>
       </nav>
     );
