@@ -37,7 +37,10 @@ export default class Login extends React.Component {
           password: result.additionalUserInfo.profile.id,
           username: result.additionalUserInfo.profile.id,
           token: result.credential.idToken
-        }).then(() => console.warn("yesssssssssssssssssss"));
+        }).then(() => {
+          console.warn("yesssssssssssssssssss")
+          return this.props.history.replace('/')
+        });
         
       })
       .catch(error => console.log(`Error ${error.code}: ${error.message}`))

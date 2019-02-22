@@ -134,7 +134,6 @@ class ProductViewSet(mixins.CreateModelMixin,
 
 
 class ComentariosListCreateAPIView(generics.ListCreateAPIView):
-    print("\n---------------------------------------  ComentariosListCreateAPIView  -- \n")
     lookup_field = 'product__slug'
     lookup_url_kwarg = 'product_slug'
     permission_classes = (IsAuthenticatedOrReadOnly,)
@@ -145,7 +144,7 @@ class ComentariosListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = ComentarioSerializer
 
     def filter_queryset(self, queryset):
-        print("\n---------------------------------------  ComentariosListCreateAPIView-filter_queryset-- \n")    
+        
         # The built-in list function calls `filter_queryset`. Since we only
         # want comments for a specific article, this is a good place to do
         # that filtering.
@@ -153,18 +152,21 @@ class ComentariosListCreateAPIView(generics.ListCreateAPIView):
 
         return queryset.filter(**filters)
 
-    def create(self, request, article_slug=None):
-        print("\n---------------------------------------  ComentariosListCreateAPIView-create-- \n")    
-        data = request.data.get('comentario', {})
+        
+
+    def create(self, request, product_slug=None):
+        data = request.data.get('comment', {})
         context = {'saler': request.user.profile}
 
         try:
             context['product'] = Product.objects.get(slug=product_slug)
+            print("\n---------------------------------------1", context)    
         except Product.DoesNotExist:
             raise NotFound('An product with this slug does not exist.')
 
+
         serializer = self.serializer_class(data=data, context=context)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid(raise_exception=False)
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)

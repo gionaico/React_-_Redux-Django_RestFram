@@ -185,7 +185,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class SocialLoginSerializer(serializers.ModelSerializer):
     email = serializers.CharField(max_length=255)
-    username = serializers.CharField(max_length=255, read_only=True)
+    username = serializers.CharField(max_length=255)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)
 
@@ -219,6 +219,12 @@ class SocialLoginSerializer(serializers.ModelSerializer):
         # we pass `email` as the `username` value. Remember that, in our User
         # model, we set `USERNAME_FIELD` as `email`.
         usuario = authenticate(username=email, password=password)
+        if usuario:
+            return {
+                'email': usuario.email,
+                'username': usuario.username,
+                'token': usuario.token
+            }
         print("22222************-", usuario)
         # If no user was found matching this email/password combination then
         # `authenticate` will return `None`. Raise an exception in this case.
@@ -228,8 +234,8 @@ class SocialLoginSerializer(serializers.ModelSerializer):
         # purpose of this flag to tell us whether the user has been banned
         # or otherwise deactivated. This will almost never be the case, but
         # it is worth checking for. Raise an exception in this case.
-        if not usuario.is_active:            
-            User.objects.create_user(**data)
+        #if not usuario.is_active:            
+        User.objects.create_user(**data)
 
 
         print("4444************-", "usuario")

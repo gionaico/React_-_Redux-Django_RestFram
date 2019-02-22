@@ -54,12 +54,12 @@ class LoginAPIView(APIView):
 
 class SocialLoginAPIView(APIView):
     permission_classes = (AllowAny,)
-    #renderer_classes = (UserJSONRenderer,)
+    renderer_classes = (UserJSONRenderer,)
     serializer_class = SocialLoginSerializer
 
     def post(self, request):
         user = request.data.get('user', {})
-        print("----yeeeeeeeeeee", user)
+        print("----entra en post", "user")
         
         # Notice here that we do not call `serializer.save()` like we did for
         # the registration endpoint. This is because we don't actually have

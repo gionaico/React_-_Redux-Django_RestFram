@@ -1,27 +1,25 @@
-D
-## Disign
-    SASS implementation
-    BEM methodology
-    GRID
-    FLEX
-    ANIMATIONS
-    SVG
-    SVG-ANIMATIONS
 
 
 ## Develoment
+    sweetalert2 https://sweetalert2.github.io/
     sass-loader to have css by modules.
     jsdoc to document my code.
-    sweetalert2 https://sweetalert2.github.io/
+    Django relations (many to many, one to many) 
+    Productos de la misma cadegoria sugeridos en la vista details
+    Reutilizacion de componentes.
     Mobx
     react-hooks 
     Pagination
-    Slug 
-    Django relations (many to many, one to many) 
-    List
-    Details
-    Productos de la misma cadegoria sugeridos en la vista details
-    Reutilizacion de componentes.
+    Slug - busqueda por slug 
+    Product-List
+    Product-Details
+    Social-Login Firebase
+    Update profile
+    Visualizar comentarios de un producto en la vista detalles-product
+    Crear comentarios de un producto en la vista detalles-product
+
+    *En la parte de redux
+    Tiene el form con redux-form/validation y sweet alerts.
 
 
 
@@ -35,6 +33,11 @@ D
         picture ==> /src/components/Header.js
     
     Humans.txt/Robots.txt ==> /public
+
+    BEM
+    He intentado utilizar "BEM" la mayoria de veces, sin embargo en ocasiones resulta dificil, ya que si en codigo cambias un div "padre" de lugar, este deja de ser el elemento raiz de un conjunto y pierdo un poco la referencia primera.
+        /src/componets/products/products.sass,
+        address ==> /src/componets/footer/footer.scss,
 
     Clases y variables globales sass/scss
         /src/styles.sass
@@ -60,7 +63,7 @@ D
     Efecto Saturation
         La imagen toma unos bordes y la satura para crear un mayor contraste 
         /src/components/Home/home.sass  .imgCarrusel
-        
+
     Efecto con Transition
         Expande la imagen al hacer hover sobre la imagen
         /src/components/Products/products.sass  .products-container__img
@@ -79,9 +82,6 @@ D
         /src/components/Home/home.sass
         /src/styles.sass
     
-    BEM
-        /src/componets/products/products.sass,
-        address ==> /src/componets/footer/footer.scss,
 
 
     
@@ -90,23 +90,3 @@ D
 
         
 
-
-
-<picture>
-    <source srcset="smaller.jpg, smaller_retina.jpg 2x" media="(max-width: 768px)">
-    <source srcset="default.jpg, default_retina.jpg 2x">
-    <img srcset="default.jpg, default_retina.jpg 2x" alt="My default image">
-</picture>
-
-    mejoras
-
-    React social-login
-    Faker Orm
-    React GoogleMaps
-    Codigo Generico
-    react DRF-FileUploader
-    React ApolloGraphQl
-    Hoobs-React
-    WhishList/Reviews
-    codigo generico
-    mas funcionalidad

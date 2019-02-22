@@ -73,7 +73,7 @@ class ComentarioSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         product = self.context['product']
         saler = self.context['saler']
-
+        print(product)
         return Comentario.objects.create(
             saler=saler, product=product, **validated_data
         )

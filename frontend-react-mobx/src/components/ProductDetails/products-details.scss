@@ -25,6 +25,26 @@
     align-items: center;
 }
 
+.comments{
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: $screen-md-min;
+    padding: $general-padding;
+    margin-left: auto;
+    margin-right: auto;
+    gap:$general-gap;
+}
+
+.comments-img__user{
+    width: $icon-mini-size
+}
+.p1{
+    color:red;
+    margin-left: 0;
+}
+.p2 {
+    color: blue;
+}
 @media (max-width: $screen-sm-min) {
     .product-section {
         grid-template-columns: 1fr;

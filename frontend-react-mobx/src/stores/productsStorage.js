@@ -10,6 +10,7 @@ export class ProductsStore {
   @observable totalPagesCount = 0;
   @observable predicate = {};
   @observable productosDeCategoriasRelacionadas = observable.map();
+  @observable comentarios = observable.map();
   @observable productsRegistry = observable.map();
   
   @computed get products() {
@@ -18,6 +19,11 @@ export class ProductsStore {
 
   @computed get productosDeCategoriasRe() {
     return this.productosDeCategoriasRelacionadas.values();
+  };
+
+
+  @computed get comentariosAll() {
+    return this.comentarios.values();
   };
 
   clear() {
@@ -75,46 +81,52 @@ export class ProductsStore {
         console.warn("--------",product.categoryList[0], this.productsRegistry)
         return product;
       }))
-      .then( product => agent.Products.byCategory(product.categoryList[0]))
-      /* .then((res)=>{
-        this.productosDeCategoriasRelacionadas=res
-        console.log("**************",res, this.productosDeCategoriasRelacionadas)
-        return ""
-      }) */
-      .then(action( productRelacionados  => {
-        this.productosDeCategoriasRelacionadas.clear();
-        console.warn("000000", productRelacionados, productRelacionados.products, this.productosDeCategoriasRelacionadas)
-         productRelacionados.products.forEach(product => this.productosDeCategoriasRelacionadas.set(product.slug, product));
-        return productRelacionados;
-      }))
+      .then( product => {
+        agent.Products.byCategory(product.categoryList[0]).then(action( productRelacionados  => {
+
+          console.info("productRelacionados-----", productRelacionados)
+          this.productosDeCategoriasRelacionadas.clear();
+          
+          productRelacionados.products.forEach(product => this.productosDeCategoriasRelacionadas.set(product.slug, product));
+          
+          console.info("productRelacionados222-----", product, this.productosDeCategoriasRelacionadas)
+          return productRelacionados;
+        }))
+
+        /*----------*/console.info("console.info(product)", product.slug)
+        
+        agent.Comentarios.getAll(product.slug).then(action(comentarios => {
+          
+          this.comentarios.clear();
+          comentarios.results.forEach(productComent => this.comentarios.set(productComent.id, productComent));
+
+          console.error("Comentarios.getAll......-----", comentarios, "this.comentarios", this.comentarios)
+          
+          return;
+        }))
+
+      })
       .finally(action(() => { this.isLoading = false; }));
   }
 
+  @action Comentar(slug, comment) {
+    console.log("$$$$$$$$$$llega")
+    return agent.Comentarios.create(slug, comment)
+      .then((w)=>{
+        agent.Comentarios.getAll(slug).then(action(comentarios => {
+
+          this.comentarios.clear();
+          comentarios.results.forEach(productComent => this.comentarios.set(productComent.id, productComent));
+
+          console.error("Comentarios.getAll......-----", comentarios, "this.comentarios", this.comentarios)
+
+          return;
+        }))
+      })
+      .catch(e=>console.error(e))
+  }
+
  
-  @action createProduct(product) {
-    return agent.Products.create(product)
-      .then(({ product }) => {
-        this.productsRegistry.set(product.slug, product);
-        return product;
-      })
-  }
-
-  @action updateProduct(data) {
-    return agent.Products.update(data)
-      .then(({ product }) => {
-        this.productsRegistry.set(product.slug, product);
-        return product;
-      })
-  }
-
-  @action deleteProduct(slug) {
-    this.productsRegistry.delete(slug);
-    return agent.Products.del(slug)
-      .catch(action(err => {
-        this.loadProducts();
-        throw err;
-      }));
-  }
 }
 
 export default new ProductsStore();

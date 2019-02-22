@@ -46,11 +46,13 @@ class AuthStore {
   }
 
   @action socialLogin(data) {
-    console.error("dentro yeeee", data)
+    console.log("dentro yeeee", data)
     this.inProgress = true;
     this.errors = undefined;
     return agent.Auth.socialLogin(data)
-      .then(({user}) => commonStore.setToken(user.token))
+      .then(({user}) => {
+        console.log("dentro user2", user)
+       return commonStore.setToken(user.token)})
       .then(() => userStore.pullUser())
       .catch(action((err) => {
         this.errors = err.response && err.response.body && err.response.body.errors;

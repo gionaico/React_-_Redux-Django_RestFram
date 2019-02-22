@@ -23,16 +23,23 @@ class UserManager(BaseUserManager):
 
     def create_user(self, username, email, password=None):
         """Create and return a `User` with an email, username and password."""
+        print("create_user//////////////////////////////", username, email, password,"0000")
         if username is None:
+            print("create_user-----username is None:", username, email, password, self)
             raise TypeError('Users must have a username.')
 
         if email is None:
+            print("create_user----------email is None", username, email, password, self)
             raise TypeError('Users must have an email address.')
+        
+        print("create_user----------en ningun if", username, email, password)
 
         user = self.model(username=username, email=self.normalize_email(email))
+        print(user, "create_user----------self.model", username, email, password)
         user.set_password(password)
+        print(user, "create_user----------set_password(password)", username, email, password)
         user.save()
-
+        print(user, "create_user----------user.save()", username, email, password)
         return user
 
     def create_superuser(self, username, email, password):
@@ -90,6 +97,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
     objects = UserManager()
 
     def __str__(self):
+        print("__str__//////////////////////////////", self)
         """
         Returns a string representation of this `User`.
 
@@ -99,6 +107,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
 
     @property
     def token(self):
+        print("token//////////////////////////////", self)
         """
         Allows us to get a user's token by calling `user.token` instead of
         `user.generate_jwt_token().
@@ -109,14 +118,16 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
         return self._generate_jwt_token()
 
     def get_full_name(self):
-      """
-      This method is required by Django for things like handling emails.
-      Typically, this would be the user's first and last name. Since we do
-      not store the user's real name, we return their username instead.
-      """
-      return self.username
+        print("get_full_name//////////////////////////////", self)
+        """
+        This method is required by Django for things like handling emails.
+        Typically, this would be the user's first and last name. Since we do
+        not store the user's real name, we return their username instead.
+        """
+        return self.username
 
     def get_short_name(self):
+        print("get_short_name//////////////////////////////", self)
         """
         This method is required by Django for things like handling emails.
         Typically, this would be the user's first name. Since we do not store
@@ -125,6 +136,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimestampedModel):
         return self.username
 
     def _generate_jwt_token(self):
+        print("_generate_jwt_token//////////////////////////////", self)
         """
         Generates a JSON Web Token that stores this user's ID and has an expiry
         date set to 60 days into the future.

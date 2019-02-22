@@ -102,7 +102,7 @@ class Footer extends React.Component {
           </div>
 
           <div className="registro">
-            <address className="textregistro"> ©Inscrita en el Reg.Mercantil de Valencia, Tomo 7020, Libro 4323, Folio 205, Sec.8, Hoja V - 80116, C.I.F.B - 97.141 .410.Inscrita en el Registro General de Empresas de Venta a Distancia del Ministerio de Industria, Comercio y Turismo, con el número(NEVA) 2002 / 0300 / 10 / 46 / 9 / V.GRUTINET, GRUTINET MOVEMOS TUS VENTAS y GRUTICASH son marcas registradas por GRUTINET, S.L. </address>
+            <address className="textregistro"> ©Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero tempore sequi consectetur doloremque dolorem amet adipisci nostrum. Sint aperiam, aliquid repellat impedit libero cumque iusto blanditiis, ratione molestias quod recusandae.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero tempore sequi consectetur doloremque dolorem amet adipisci nostrum. Sint aperiam, aliquid repellat impedit libero cumque iusto blanditiis, ratione molestias quod recusandae. </address>
           </div>
         </div>
       </section>

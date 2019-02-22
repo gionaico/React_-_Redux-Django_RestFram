@@ -119,6 +119,15 @@ const Profile = {
 
 /* --------------------------------------------------------------------------------------------- */
 
+const Comentarios = {
+  create: (slug, comment) =>
+    requests.post(`/products/${slug}/comentarios`, { comment }),
+  /* delete: (slug, commentId) =>
+    requests.del(`/articles/${slug}/comments/${commentId}`), */
+  getAll: slug =>
+    requests.get(`/products/${slug}/comentarios`)
+};
+
 
 const Categories = {
   getAll: () => requests.get('/categories')
@@ -194,5 +203,6 @@ export default {
   Comments,
   Profile,
   Tags,
-  Categories
+  Categories,
+  Comentarios
 };
